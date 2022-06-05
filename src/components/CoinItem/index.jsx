@@ -21,20 +21,20 @@ const CoinItem = ({ marketCoin }) => {
   const navigation = useNavigation();
 
   const percentageColor =
-    price_change_percentage_24h < 0 ? '#ea3943' : '#16c784';
+    price_change_percentage_24h < 0 ? '#ea3943' : '#16c784' || 'white';
 
   const normalizeMarketCap = (marketCap) => {
-    if (marketCap > 1_000_000_000_000) {
-      return `${Math.floor(marketCap / 1_000_000_000_000)} T`;
+    if (marketCap > 1e12) {
+      return `${(marketCap / 1e12).toFixed(3)} T`;
     }
-    if (marketCap > 1_000_000_000) {
-      return `${Math.floor(marketCap / 1_000_000_000)} B`;
+    if (marketCap > 1e9) {
+      return `${(marketCap / 1e9).toFixed(3)} B`;
     }
-    if (marketCap > 1_000_000) {
-      return `${Math.floor(marketCap / 1_000_000)} M`;
+    if (marketCap > 1e6) {
+      return `${(marketCap / 1e6).toFixed(3)} M`;
     }
-    if (marketCap > 1_000) {
-      return `${Math.floor(marketCap / 1_000)} K`;
+    if (marketCap > 1e3) {
+      return `${(marketCap / 1e3).toFixed(3)} K`;
     }
     return marketCap;
   };
@@ -61,13 +61,17 @@ const CoinItem = ({ marketCoin }) => {
           </View>
           <Text style={styles.text}>{symbol.toUpperCase()}</Text>
           <AntDesign
-            name={price_change_percentage_24h < 0 ? 'caretdown' : 'caretup'}
+            name={
+              price_change_percentage_24h < 0
+                ? 'caretdown'
+                : 'caretup' || 'white'
+            }
             size={12}
             color={percentageColor}
             style={{ alignSelf: 'center', marginRight: 5 }}
           />
           <Text style={{ color: percentageColor }}>
-            {price_change_percentage_24h.toFixed(2)}%
+            {price_change_percentage_24h?.toFixed(2)}%
           </Text>
         </View>
       </View>

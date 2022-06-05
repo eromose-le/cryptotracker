@@ -1,8 +1,9 @@
-import React from "react";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import HomeScreen from "../screens/HomeScreen";
-import WatchlistScreen from "../screens/WatchlistScreen";
-import { Entypo, FontAwesome } from "@expo/vector-icons";
+import React from 'react';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import HomeScreen from '../screens/HomeScreen';
+import WatchlistScreen from '../screens/WatchlistScreen';
+import { Entypo, FontAwesome, Foundation } from '@expo/vector-icons';
+import PortfolioScreen from '../screens/PortfolioScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -12,11 +13,11 @@ const BottomTabNavigator = () => {
       initialRouteName="Home"
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: "white",
-        tabBarInactiveTintColor: "grey",
+        tabBarActiveTintColor: 'white',
+        tabBarInactiveTintColor: 'grey',
         tabBarStyle: {
-          backgroundColor: "#181818",
-        },
+          backgroundColor: '#181818'
+        }
       }}
     >
       <Tab.Screen
@@ -25,7 +26,20 @@ const BottomTabNavigator = () => {
         options={{
           tabBarIcon: ({ focused, color }) => (
             <Entypo name="home" size={focused ? 30 : 25} color={color} />
-          ),
+          )
+        }}
+      />
+      <Tab.Screen
+        name="Portfolio"
+        component={PortfolioScreen}
+        options={{
+          tabBarIcon: ({ focused, color }) => (
+            <Foundation
+              name="graph-pie"
+              size={focused ? 30 : 25}
+              color={color}
+            />
+          )
         }}
       />
       <Tab.Screen
@@ -34,7 +48,7 @@ const BottomTabNavigator = () => {
         options={{
           tabBarIcon: ({ focused, color }) => (
             <FontAwesome name="star" size={focused ? 30 : 25} color={color} />
-          ),
+          )
         }}
       />
     </Tab.Navigator>

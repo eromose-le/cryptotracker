@@ -1,0 +1,28 @@
+## A CRYPTO TRACKER APP
+
+```
+#### LAYOUT
+```
+
+- SCREENS
+  - HomeScreen
+    - CoinItem
+  - CoinDetailedScreen
+    - CoinDetailedHeader
+  - WatchlistScreen
+    - CoinItem
+  - PortfolioScreen
+    - PortfolioAssetsList
+    - PortfolioAssetItem
+  - AddNewAssetScreen
+
+## TECHNOLOGIES
+
+- React-native
+- Context API
+- Offline Storage
+
+```
+  - add fonts in expo
+    expo install expo-font @expo-google-fonts/inter
+```

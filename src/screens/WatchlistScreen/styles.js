@@ -8,9 +8,31 @@ const styles = StyleSheet.create({
   deleteItem: {
     width: '100%',
     paddingVertical: 5,
-    backgroundColor: '#aaa',
+    backgroundColor: 'transparent',
     flexDirection: 'column',
     alignItems: 'center'
+  },
+  textContainer: {
+    flex: 1,
+    alignContent: 'center',
+    justifyContent: 'center'
+  },
+  text: {
+    color: 'grey',
+    fontSize: 15,
+    alignSelf: 'center'
+  },
+  buttonContainer: {},
+  button: {
+    borderColor: 'grey',
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingHorizontal: 5,
+    paddingVertical: 3,
+    marginVertical: 5,
+    color: 'grey',
+    fontSize: 12,
+    alignSelf: 'center'
   }
 });
 
