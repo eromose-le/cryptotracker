@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
     marginLeft: 5
   },
   boughtQuantityContainer: {
+    flex: 1,
     alignItems: 'center',
     marginTop: 50
   },

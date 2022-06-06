@@ -4,8 +4,8 @@ import {
   Text,
   TextInput,
   Pressable,
-  TouchableWithoutFeedback,
-  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
   ScrollView
 } from 'react-native';
 import SearchableDropdown from 'react-native-searchable-dropdown';
@@ -95,7 +95,11 @@ const AddNewAssetScreen = () => {
   // } = selectedCoin;
 
   return (
-    <View style={{ flex: 1 }}>
+    <KeyboardAvoidingView
+      style={{ flex: 1 }}
+      keyboardVerticalOffset={80}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+    >
       <SearchableDropdown
         items={allCoins}
         onItemSelect={(item) => setSelectedCoinId(item.id)}
@@ -119,49 +123,27 @@ const AddNewAssetScreen = () => {
       />
       {selectedCoin && (
         <>
-          <View
-            style={{
-              ...styles.boughtQuantityContainer,
-              flex: boughtAssetQuantity ? 0 : 1
-            }}
-          >
-            <ScrollView
-              keyboardShouldPersistTaps="handled"
-              style={{
-                width: '100%'
-              }}
-              contentContainerStyle={{
-                flexDirection: 'column',
-                alignItems: 'center'
-              }}
-            >
-              <View style={{ flexDirection: 'row' }}>
-                <TextInput
-                  style={{
-                    color: 'white',
-                    fontSize: 90,
-                    maxWidth: 280,
-                    flexWrap: 'wrap'
-                  }}
-                  value={boughtAssetQuantity}
-                  placeholder="0"
-                  keyboardType="numeric"
-                  onChangeText={setBoughtAssetQuantity}
-                />
-                <Text style={styles.ticker}>
-                  {selectedCoin?.symbol.toUpperCase()}
-                </Text>
-              </View>
-              <Text style={styles.pricePerCoin}>
-                ${selectedCoin?.market_data?.current_price?.usd} per coin
+          <View style={styles.boughtQuantityContainer}>
+            <View style={{ flexDirection: 'row' }}>
+              <TextInput
+                style={{
+                  color: 'white',
+                  fontSize: 90,
+                  maxWidth: 280,
+                  flexWrap: 'wrap'
+                }}
+                value={boughtAssetQuantity}
+                placeholder="0"
+                keyboardType="numeric"
+                onChangeText={setBoughtAssetQuantity}
+              />
+              <Text style={styles.ticker}>
+                {selectedCoin.symbol.toUpperCase()}
               </Text>
-              {/* <Feather
-                name="chevrons-down"
-                size={20}
-                color="grey"
-                style={{ marginTop: 10 }}
-              /> */}
-            </ScrollView>
+            </View>
+            <Text style={styles.pricePerCoin}>
+              ${selectedCoin.market_data.current_price.usd} per coin
+            </Text>
           </View>
           <Pressable
             style={{
@@ -182,7 +164,7 @@ const AddNewAssetScreen = () => {
           </Pressable>
         </>
       )}
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 

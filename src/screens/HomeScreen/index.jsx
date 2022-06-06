@@ -33,19 +33,36 @@ const HomeScreen = () => {
 
   return (
     <View>
-      <Text
+      <View
         style={{
-          fontFamily: 'Capuche',
-          color: 'white',
-          fontSize: 23,
-          letterSpacing: 1,
-          paddingHorizontal: 20,
-          paddingBottom: 5
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'center'
         }}
       >
-        Crypto List
-      </Text>
-
+        <Text
+          style={{
+            fontFamily: 'DroidSans',
+            color: 'white',
+            fontSize: 23,
+            letterSpacing: 1,
+            paddingHorizontal: 20,
+            paddingBottom: 5
+          }}
+        >
+          Cryptoassets List
+        </Text>
+        <Text
+          style={{
+            color: 'lightgrey',
+            fontSize: 12,
+            paddingHorizontal: 10,
+            opacity: 0.1
+          }}
+        >
+          Powered by CoinGecko
+        </Text>
+      </View>
       <FlatList
         data={coins}
         renderItem={({ item }) => <CoinItem marketCoin={item} />}

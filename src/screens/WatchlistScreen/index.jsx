@@ -75,7 +75,9 @@ const WatchlistScreen = () => {
           <RefreshControl
             refreshing={loading}
             tintColor="white"
-            onRefresh={fetchWatchlistedCoins}
+            onRefresh={
+              watchlistCoinIds.length > 0 ? fetchWatchlistedCoins : null
+            }
           />
         }
       />
@@ -93,42 +95,3 @@ const WatchlistScreen = () => {
 };
 
 export default WatchlistScreen;
-
-// return (
-//   <>
-//     {transformCoinIds().length <= 0 ? (
-//       <View style={styles.textContainer}>
-//         <Text style={styles.text}>Watchlist empty..</Text>
-//         <TouchableOpacity
-//           style={styles.buttonContainer}
-//           onPress={() => navigation.goBack()}
-//         >
-//           <Text style={styles.button}>Go back</Text>
-//         </TouchableOpacity>
-//       </View>
-//     ) : (
-//       <>
-//         <FlatList
-//           data={coins}
-//           renderItem={({ item }) => <CoinItem marketCoin={item} />}
-//           refreshControl={
-//             <RefreshControl
-//               refreshing={loading}
-//               tintColor="white"
-//               onRefresh={fetchWatchlistedCoins}
-//             />
-//           }
-//         />
-//         <TouchableOpacity
-//           style={styles.deleteContainer}
-//           onPress={() => clearWatchlist()}
-//         >
-//           <View style={styles.deleteItem}>
-//             <Ionicons name="ios-basket-outline" size={25} color="#4f4f4f" />
-//             <Text style={{ color: '#4f4f4f', fontSize: 8 }}>Clear all</Text>
-//           </View>
-//         </TouchableOpacity>
-//       </>
-//     )}
-//   </>
-// );
