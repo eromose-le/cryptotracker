@@ -21,8 +21,18 @@
 - React-native
 - Context API
 - Offline Storage
+- Candle chart
+- useCallback
+- useMemo
 
 ```
   - add fonts in expo
     expo install expo-font @expo-google-fonts/inter
 ```
+
+### TODO
+
+- logo as loader
+- loader when deleting portfolio assets
+- change loader when entering watchlist screen
+- change update to add to watchlist

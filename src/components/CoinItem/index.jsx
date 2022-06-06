@@ -44,37 +44,47 @@ const CoinItem = ({ marketCoin }) => {
       style={styles.coinContainer}
       onPress={() => navigation.navigate('CoinDetailedScreen', { coinId: id })}
     >
-      <Image
-        source={{ uri: image }}
+      {/* left */}
+      <View
         style={{
-          height: 30,
-          width: 30,
-          marginRight: 10,
-          alignSelf: 'center'
+          flexDirection: 'row',
+          alignItems: 'center',
+          flex: 1
         }}
-      />
-      <View>
-        <Text style={styles.title}>{name}</Text>
-        <View style={{ flexDirection: 'row' }}>
-          <View style={styles.rankContainer}>
-            <Text style={styles.rank}>{market_cap_rank}</Text>
+      >
+        <Image
+          source={{ uri: image }}
+          style={{
+            height: 30,
+            width: 30,
+            marginRight: 10,
+            alignSelf: 'center'
+          }}
+        />
+        <View>
+          <Text style={styles.title}>{name}</Text>
+          <View style={{ flexDirection: 'row' }}>
+            <View style={styles.rankContainer}>
+              <Text style={styles.rank}>{market_cap_rank}</Text>
+            </View>
+            <Text style={styles.text}>{symbol.toUpperCase()}</Text>
+            <AntDesign
+              name={
+                price_change_percentage_24h < 0
+                  ? 'caretdown'
+                  : 'caretup' || 'white'
+              }
+              size={12}
+              color={percentageColor}
+              style={{ alignSelf: 'center', marginRight: 5 }}
+            />
+            <Text style={{ color: percentageColor }}>
+              {price_change_percentage_24h?.toFixed(2)}%
+            </Text>
           </View>
-          <Text style={styles.text}>{symbol.toUpperCase()}</Text>
-          <AntDesign
-            name={
-              price_change_percentage_24h < 0
-                ? 'caretdown'
-                : 'caretup' || 'white'
-            }
-            size={12}
-            color={percentageColor}
-            style={{ alignSelf: 'center', marginRight: 5 }}
-          />
-          <Text style={{ color: percentageColor }}>
-            {price_change_percentage_24h?.toFixed(2)}%
-          </Text>
         </View>
       </View>
+      {/* middle */}
       <View style={{ flex: 0.5, paddingLeft: 10 }}>
         <LineChart
           withVerticalLabels={false}
@@ -90,8 +100,8 @@ const CoinItem = ({ marketCoin }) => {
               }
             ]
           }}
-          width={100}
-          height={50}
+          width={75}
+          height={55}
           chartConfig={{
             backgroundGradientFrom: '#1E2923',
             backgroundGradientFromOpacity: 0,
@@ -111,7 +121,8 @@ const CoinItem = ({ marketCoin }) => {
           }}
         />
       </View>
-      <View style={{ marginLeft: 'auto', alignItems: 'flex-end' }}>
+      {/* right */}
+      <View style={{ marginLeft: 'auto', alignItems: 'flex-end', flex: 0.6 }}>
         <Text style={styles.title}>{current_price}</Text>
         <Text style={{ color: 'white' }}>
           MCap {normalizeMarketCap(market_cap)}
