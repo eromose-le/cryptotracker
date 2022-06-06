@@ -5,11 +5,20 @@ import styles from './styles';
 import PortfolioAssetsItem from '../PortfolioAssetItem';
 import { useNavigation } from '@react-navigation/native';
 import { useRecoilValue, useRecoilState } from 'recoil';
-import { allPortfolioAssets } from '../../../../atoms/PortfolioAssets';
+import {
+  allPortfolioAssets,
+  allPortfolioBoughtAssetsInStorage
+} from '../../../../atoms/PortfolioAssets';
+import { SwipeListView } from 'react-native-swipe-list-view';
+import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const PortfolioAssetsList = () => {
   const navigation = useNavigation();
   const assets = useRecoilValue(allPortfolioAssets);
+  const [storageAssets, setStorageAssets] = useRecoilState(
+    allPortfolioBoughtAssetsInStorage
+  );
 
   // Total Holding bal
   const getCurrentBalance = () =>
@@ -42,12 +51,87 @@ const PortfolioAssetsList = () => {
     );
   };
 
+  const isNaNConverter = (val) => {
+    if (isNaN(val)) {
+      return 0;
+    }
+    return val;
+  };
+
+  // deletFunc
+  const onDeleteAsset = async (asset) => {
+    // const newAssets = storageAssets.filter((coin) => coin.id !== asset.item.id);
+    const newAssets = storageAssets.filter(
+      (coin) => coin.unique_id !== asset.item.unique_id
+    );
+
+    const jsonValue = JSON.stringify(newAssets);
+    await AsyncStorage.setItem('@portfolio_coins', jsonValue);
+    setStorageAssets(newAssets);
+  };
+
+  // deleteBtn component
+  const RenderDeleteButton = ({ data }) => {
+    return (
+      <Pressable
+        style={{
+          flex: 1,
+          backgroundColor: '#EA3943',
+          alignItems: 'flex-end',
+          justifyContent: 'center',
+          paddingRight: 30,
+          marginLeft: 20
+        }}
+        onPress={() => onDeleteAsset(data)}
+      >
+        <FontAwesome name="trash-o" size={24} color="white" />
+      </Pressable>
+    );
+  };
+
+  const RenderUpdateButton = ({ data }) => {
+    return (
+      <Pressable
+        style={{
+          flex: 1,
+          backgroundColor: '#16c784',
+          alignItems: 'flex-start',
+          justifyContent: 'center',
+          paddingLeft: 30,
+          marginRight: 20
+        }}
+        onPress={() => console.log('updated!!')}
+      >
+        <MaterialIcons name="system-update-alt" size={24} color="white" />
+      </Pressable>
+    );
+  };
+
+  const renderButton = (data) => {
+    return (
+      <View
+        style={{ flexDirection: 'row', backgroundColor: '#282828', flex: 1 }}
+      >
+        <RenderUpdateButton data={data} />
+        <RenderDeleteButton data={data} />
+      </View>
+    );
+  };
+
   const isChangePositive = () => getCurrentValueChange() >= 0;
 
   return (
-    <FlatList
+    <SwipeListView
       data={assets}
       renderItem={({ item }) => <PortfolioAssetsItem assetItem={item} />}
+      rightOpenValue={-75}
+      leftOpenValue={75}
+      directionalDistanceChangeThreshold={10}
+      stopRightSwipe={-175}
+      stopLeftSwipe={175}
+      // disableRightSwipe
+      keyExtractor={({ id }, index) => `${id}${index}`}
+      renderHiddenItem={(data) => renderButton(data)}
       ListHeaderComponent={
         <>
           <View style={styles.balanceContainer}>
@@ -78,11 +162,46 @@ const PortfolioAssetsList = () => {
                 style={{ alignSelf: 'center', marginRight: 5 }}
               />
               <Text style={styles.percentageChange}>
-                {getCurrentPercentageChange()}%
+                {isNaNConverter(getCurrentPercentageChange())}%
               </Text>
             </View>
           </View>
           <Text style={styles.assetsLabel}>Your Assets</Text>
+          <View style={styles.headerLabelContainer}>
+            <Text
+              style={{
+                color: 'white',
+                fontSize: 13,
+                fontWeight: 'bold',
+                flex: 1.2,
+                textAlign: 'center'
+              }}
+            >
+              Name
+            </Text>
+            <Text
+              style={{
+                color: 'white',
+                fontSize: 13,
+                flex: 1,
+                fontWeight: 'bold',
+                textAlign: 'center'
+              }}
+            >
+              Current Price
+            </Text>
+            <Text
+              style={{
+                color: 'white',
+                fontSize: 13,
+                flex: 1,
+                fontWeight: 'bold',
+                textAlign: 'center'
+              }}
+            >
+              Wallet Balance
+            </Text>
+          </View>
         </>
       }
       ListFooterComponent={

@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   title: {
@@ -9,11 +9,12 @@ const styles = StyleSheet.create({
   },
   ticker: {
     color: 'grey',
-    fontWeight: '700' 
+    fontWeight: '700'
   },
   coinContainer: {
     flexDirection: 'row',
-    padding: 15
+    padding: 15,
+    backgroundColor: '#121212'
   },
   quantityContainer: {
     marginLeft: 'auto',

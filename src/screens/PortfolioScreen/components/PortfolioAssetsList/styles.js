@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   currentBalance: {
@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
   },
   valueChange: {
     fontWeight: '700',
-    fontSize: 16,
+    fontSize: 16
   },
   percentageChange: {
     color: 'white',
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 10,
     marginBottom: 5,
-    marginHorizontal: 10,
+    marginHorizontal: 10
   },
   priceChangePercentageContainer: {
     flexDirection: 'row',
@@ -48,12 +48,22 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginVertical: 25,
     marginHorizontal: 10,
-    borderRadius: 5 
+    borderRadius: 5
   },
   buttonText: {
     color: 'white',
     fontSize: 17,
     fontWeight: '600'
+  },
+  headerLabelContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    backgroundColor: '#2B2B2B',
+    paddingVertical: 7,
+    borderRadius: 5,
+    marginVertical: 10
+    // flexDirection: 'row',
+    // backgroundColor: '#121212'
   }
 });
 
