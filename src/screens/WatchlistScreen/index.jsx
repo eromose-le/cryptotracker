@@ -7,6 +7,7 @@ import {
   TouchableOpacity
 } from 'react-native';
 import { useWatchlist } from '../../Contexts/WatchlistContext';
+import { useTheme } from '../../Contexts/ThemeContext';
 import CoinItem from '../../components/CoinItem';
 import { getWatchlistedCoins } from '../../services/requests';
 import { Ionicons } from '@expo/vector-icons';
@@ -16,6 +17,13 @@ import { useNavigation } from '@react-navigation/native';
 const WatchlistScreen = () => {
   const navigation = useNavigation();
   const { watchlistCoinIds, clearWatchlist } = useWatchlist();
+  const { theme, changeThemeData } = useTheme();
+  const [toggle, setToggle] = useState(false);
+
+  const changeThemeColor = () => {
+    setToggle(!toggle);
+    return toggle ? changeThemeData(2) : changeThemeData(0);
+  };
 
   const [coins, setCoins] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -81,6 +89,12 @@ const WatchlistScreen = () => {
           />
         }
       />
+      <TouchableOpacity
+        style={{ backgroundColor: theme.body, width: 200, height: 200 }}
+        onPress={() => changeThemeColor()}
+      >
+        <Text style={{ color: '#fff' }}>Toggle</Text>
+      </TouchableOpacity>
       <TouchableOpacity
         style={styles.deleteContainer}
         onPress={() => clearWatchlist()}
