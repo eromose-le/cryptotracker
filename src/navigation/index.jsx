@@ -4,6 +4,7 @@ import HomeScreen from '../screens/HomeScreen';
 import CoinDetailedScreen from '../screens/CoinDetailedScreen';
 import BottomTabNavigator from './BottomTabNavigator';
 import AddNewAssetScreen from '../screens/AddNewAssetScreen';
+import ProfileScreen from '../screens/ProfileScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -22,6 +23,12 @@ const Navigation = () => {
         name="CoinDetailedScreen"
         component={CoinDetailedScreen}
         options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="ProfileScreen"
+        component={ProfileScreen}
+        options={{ headerShown: false }}
+        // initialParams={{ themeState }}
       />
       <Stack.Screen
         name="AddNewAssetScreen"

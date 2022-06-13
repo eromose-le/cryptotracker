@@ -13,8 +13,13 @@ import { getWatchlistedCoins } from '../../services/requests';
 import { Ionicons } from '@expo/vector-icons';
 import styles from './styles';
 import { useNavigation } from '@react-navigation/native';
+import { useSelector, useDispatch } from 'react-redux';
 
 const WatchlistScreen = () => {
+  const dispatch = useDispatch();
+  const { reduxThemeToggled, reduxTheme } = useSelector(
+    (state) => state.themeReducer
+  );
   const navigation = useNavigation();
   const { watchlistCoinIds, clearWatchlist } = useWatchlist();
   const { theme, changeThemeData } = useTheme();
@@ -22,6 +27,11 @@ const WatchlistScreen = () => {
 
   const changeThemeColor = () => {
     setToggle(!toggle);
+    dispatch({
+      type: 'TOGGLE_THEME',
+      payload: reduxThemeToggled
+    });
+
     return toggle ? changeThemeData(2) : changeThemeData(0);
   };
 

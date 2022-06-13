@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, RefreshControl, View, Text } from 'react-native';
+import { FlatList, RefreshControl, View, Text, Pressable } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import CoinItem from '../../components/CoinItem';
 import { getMarketData } from '../../services/requests';
 
 const HomeScreen = () => {
+  const navigation = useNavigation();
   const [coins, setCoins] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -52,16 +54,18 @@ const HomeScreen = () => {
         >
           Cryptoassets List
         </Text>
-        <Text
-          style={{
-            color: 'lightgrey',
-            fontSize: 12,
-            paddingHorizontal: 10,
-            opacity: 0.1
-          }}
-        >
-          Powered by CoinGecko
-        </Text>
+        <Pressable onPress={() => navigation.navigate('ProfileScreen')}>
+          <Text
+            style={{
+              color: 'lightgrey',
+              fontSize: 12,
+              paddingHorizontal: 10,
+              opacity: 0.1
+            }}
+          >
+            Powered by CoinGecko
+          </Text>
+        </Pressable>
       </View>
       <FlatList
         data={coins}
