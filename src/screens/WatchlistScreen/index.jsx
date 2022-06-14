@@ -7,33 +7,17 @@ import {
   TouchableOpacity
 } from 'react-native';
 import { useWatchlist } from '../../Contexts/WatchlistContext';
-import { useTheme } from '../../Contexts/ThemeContext';
 import CoinItem from '../../components/CoinItem';
 import { getWatchlistedCoins } from '../../services/requests';
 import { Ionicons } from '@expo/vector-icons';
 import styles from './styles';
 import { useNavigation } from '@react-navigation/native';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 const WatchlistScreen = () => {
-  const dispatch = useDispatch();
-  const { reduxThemeToggled, reduxTheme } = useSelector(
-    (state) => state.themeReducer
-  );
+  const { reduxTheme } = useSelector((state) => state.themeReducer);
   const navigation = useNavigation();
   const { watchlistCoinIds, clearWatchlist } = useWatchlist();
-  const { theme, changeThemeData } = useTheme();
-  const [toggle, setToggle] = useState(false);
-
-  const changeThemeColor = () => {
-    setToggle(!toggle);
-    dispatch({
-      type: 'TOGGLE_THEME',
-      payload: reduxThemeToggled
-    });
-
-    return toggle ? changeThemeData(2) : changeThemeData(0);
-  };
 
   const [coins, setCoins] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -62,7 +46,9 @@ const WatchlistScreen = () => {
   if (transformCoinIds().length <= 0) {
     return (
       <View style={styles.textContainer}>
-        <Text style={styles.text}>Watchlist empty..</Text>
+        <Text style={{ ...styles.text, color: reduxTheme.secondary }}>
+          Watchlist empty..
+        </Text>
         <TouchableOpacity
           style={styles.buttonContainer}
           onPress={() => navigation.goBack()}
@@ -77,7 +63,7 @@ const WatchlistScreen = () => {
       <Text
         style={{
           fontFamily: 'Capuche',
-          color: 'white',
+          color: reduxTheme.primary,
           fontSize: 23,
           letterSpacing: 1,
           paddingHorizontal: 20,
@@ -92,19 +78,13 @@ const WatchlistScreen = () => {
         refreshControl={
           <RefreshControl
             refreshing={loading}
-            tintColor="white"
+            tintColor={reduxTheme.primary}
             onRefresh={
               watchlistCoinIds.length > 0 ? fetchWatchlistedCoins : null
             }
           />
         }
       />
-      <TouchableOpacity
-        style={{ backgroundColor: theme.body, width: 200, height: 200 }}
-        onPress={() => changeThemeColor()}
-      >
-        <Text style={{ color: '#fff' }}>Toggle</Text>
-      </TouchableOpacity>
       <TouchableOpacity
         style={styles.deleteContainer}
         onPress={() => clearWatchlist()}

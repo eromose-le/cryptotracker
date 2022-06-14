@@ -9,26 +9,32 @@ export const useTheme = () => useContext(ThemeContext);
 
 const ThemeProvider = ({ children }) => {
   const dispatch = useDispatch();
-  const { reduxTheme } = useSelector((state) => state.themeReducer);
+  const { reduxThemeToggled } = useSelector((state) => state.themeReducer);
   const [selectTheme, setSelectTheme] = useState(0);
   const [theme, setTheme] = useState(colorThemes[selectTheme]);
 
   const getThemeData = async () => {
     try {
+      // clearTheme();
       const jsonValue = await AsyncStorage.getItem('@theme_colors');
-      setTheme(jsonValue != null ? JSON.parse(jsonValue) : []);
+      setTheme(jsonValue != null ? JSON.parse(jsonValue) : theme);
       dispatch({
         type: 'GET_THEME',
-        payload: jsonValue != null ? JSON.parse(jsonValue) : []
+        payload: jsonValue != null ? JSON.parse(jsonValue) : theme
       });
     } catch (e) {
       console.log(e);
     }
   };
 
+  const clearTheme = async () => {
+    await AsyncStorage.removeItem('@theme_colors');
+    setTheme(colorThemes[selectTheme]);
+  };
+
   useEffect(() => {
     getThemeData();
-  }, []);
+  }, [reduxThemeToggled]);
 
   const changeThemeData = async (colorId) => {
     try {

@@ -14,6 +14,7 @@ import { LineChart, CandlestickChart } from 'react-native-wagmi-charts';
 import { MaterialIcons } from '@expo/vector-icons';
 
 import { useRoute } from '@react-navigation/native';
+import { useSelector } from 'react-redux';
 import {
   getDetailedCoinData,
   getCoinMarketChart,
@@ -30,6 +31,7 @@ const filterDaysArray = [
 ];
 
 const CoinDetailedScreen = () => {
+  const { reduxTheme } = useSelector((state) => state.themeReducer);
   const [coin, setCoin] = useState(null);
   const [coinMarketData, setCoinMarketData] = useState(null);
   const [coinCandleChartData, setCoinCandleChartData] = useState(null);
@@ -157,10 +159,12 @@ const CoinDetailedScreen = () => {
         {/* price, balance change */}
         <View style={styles.priceContainer}>
           <View>
-            <Text style={styles.name}>{name}</Text>
+            <Text style={{ ...styles.name, color: reduxTheme.primary }}>
+              {name}
+            </Text>
             <LineChart.PriceText
               format={formatCurrency}
-              style={styles.currentPrice}
+              style={{ ...styles.currentPrice, color: reduxTheme.primary }}
             />
           </View>
           <View
@@ -189,7 +193,12 @@ const CoinDetailedScreen = () => {
         </View>
 
         {/* filter */}
-        <View style={styles.filtersContainer}>
+        <View
+          style={{
+            ...styles.filtersContainer,
+            backgroundColor: reduxTheme.tableColor
+          }}
+        >
           {filterDaysArray.map((day) => (
             <FilterComponent
               filterDay={day.filterDay}
@@ -239,30 +248,70 @@ const CoinDetailedScreen = () => {
             {/* price range High || Low etc.. */}
             <View style={styles.candleStickDataContainer}>
               <View>
-                <Text style={styles.candleStickTextLabel}>Open</Text>
+                <Text
+                  style={{
+                    ...styles.candleStickTextLabel,
+                    color: reduxTheme.tertiary
+                  }}
+                >
+                  Open
+                </Text>
                 <CandlestickChart.PriceText
-                  style={styles.candleStickText}
+                  style={{
+                    ...styles.candleStickText,
+                    color: reduxTheme.primary
+                  }}
                   type="open"
                 />
               </View>
               <View>
-                <Text style={styles.candleStickTextLabel}>High</Text>
+                <Text
+                  style={{
+                    ...styles.candleStickTextLabel,
+                    color: reduxTheme.tertiary
+                  }}
+                >
+                  High
+                </Text>
                 <CandlestickChart.PriceText
-                  style={styles.candleStickText}
+                  style={{
+                    ...styles.candleStickText,
+                    color: reduxTheme.primary
+                  }}
                   type="high"
                 />
               </View>
               <View>
-                <Text style={styles.candleStickTextLabel}>Low</Text>
+                <Text
+                  style={{
+                    ...styles.candleStickTextLabel,
+                    color: reduxTheme.tertiary
+                  }}
+                >
+                  Low
+                </Text>
                 <CandlestickChart.PriceText
-                  style={styles.candleStickText}
+                  style={{
+                    ...styles.candleStickText,
+                    color: reduxTheme.primary
+                  }}
                   type="low"
                 />
               </View>
               <View>
-                <Text style={styles.candleStickTextLabel}>Close</Text>
+                <Text
+                  style={{
+                    ...styles.candleStickTextLabel,
+                    color: reduxTheme.tertiary
+                  }}
+                >
+                  Close
+                </Text>
                 <CandlestickChart.PriceText
-                  style={styles.candleStickText}
+                  style={{
+                    ...styles.candleStickText,
+                    color: reduxTheme.primary
+                  }}
                   type="close"
                 />
               </View>
@@ -270,7 +319,11 @@ const CoinDetailedScreen = () => {
 
             {/* Date && Time */}
             <CandlestickChart.DatetimeText
-              style={{ color: 'white', fontWeight: '700', margin: 10 }}
+              style={{
+                color: reduxTheme.primary,
+                fontWeight: '700',
+                margin: 10
+              }}
             />
           </CandlestickChart.Provider>
         ) : (
@@ -283,11 +336,15 @@ const CoinDetailedScreen = () => {
         {/* converter */}
         <View style={{ flexDirection: 'row' }}>
           <View style={{ flexDirection: 'row', flex: 1 }}>
-            <Text style={{ color: 'white', alignSelf: 'center' }}>
+            <Text style={{ color: reduxTheme.primary, alignSelf: 'center' }}>
               {symbol.toUpperCase()}
             </Text>
             <TextInput
-              style={styles.input}
+              style={{
+                ...styles.input,
+                borderBottomColor: reduxTheme.primary,
+                color: reduxTheme.primary
+              }}
               value={coinValue}
               keyboardType="numeric"
               onChangeText={changeCoinValue}
@@ -295,9 +352,15 @@ const CoinDetailedScreen = () => {
           </View>
 
           <View style={{ flexDirection: 'row', flex: 1 }}>
-            <Text style={{ color: 'white', alignSelf: 'center' }}>USD</Text>
+            <Text style={{ color: reduxTheme.primary, alignSelf: 'center' }}>
+              USD
+            </Text>
             <TextInput
-              style={styles.input}
+              style={{
+                ...styles.input,
+                borderBottomColor: reduxTheme.primary,
+                color: reduxTheme.primary
+              }}
               value={usdValue}
               keyboardType="numeric"
               onChangeText={changeUsdValue}

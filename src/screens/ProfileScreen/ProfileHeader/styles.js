@@ -6,19 +6,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between'
   },
-  tickerContainer: {
+  profileContainer: {
     flexDirection: 'row',
-    alignItems: 'center'
+    flex: 1,
+    justifyContent: 'flex-start',
+    marginLeft: 100
   },
-  tickerTitle: {
+  profileTitle: {
     fontWeight: 'bold',
-    marginHorizontal: 5,
-    fontSize: 17
-  },
-  rankContainer: {
-    paddingHorizontal: 5,
-    paddingVertical: 2,
-    borderRadius: 5
+    fontSize: 18
   }
 });
 

@@ -4,19 +4,21 @@ import HomeScreen from '../screens/HomeScreen';
 import WatchlistScreen from '../screens/WatchlistScreen';
 import { Entypo, FontAwesome, Foundation } from '@expo/vector-icons';
 import PortfolioScreen from '../screens/PortfolioScreen';
+import { useSelector } from 'react-redux';
 
 const Tab = createBottomTabNavigator();
 
 const BottomTabNavigator = () => {
+  const { reduxTheme } = useSelector((state) => state.themeReducer);
   return (
     <Tab.Navigator
       initialRouteName="Home"
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: 'white',
-        tabBarInactiveTintColor: 'grey',
+        tabBarActiveTintColor: reduxTheme.primary,
+        tabBarInactiveTintColor: reduxTheme.tertiary,
         tabBarStyle: {
-          backgroundColor: '#181818'
+          backgroundColor: reduxTheme.tabBackground
         }
       }}
     >

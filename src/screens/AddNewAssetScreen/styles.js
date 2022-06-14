@@ -9,13 +9,11 @@ const styles = StyleSheet.create({
   item: {
     padding: 10,
     marginTop: 2,
-    backgroundColor: '#1e1e1e',
     borderWidth: 1,
     borderColor: '#444444',
     borderRadius: 5
   },
   ticker: {
-    color: 'grey',
     fontWeight: '700',
     fontSize: 20,
     marginTop: 25,

@@ -12,9 +12,11 @@ import {
 import { SwipeListView } from 'react-native-swipe-list-view';
 import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useSelector } from 'react-redux';
 
 const PortfolioAssetsList = () => {
   const navigation = useNavigation();
+  const { reduxTheme } = useSelector((state) => state.themeReducer);
   const assets = useRecoilValue(allPortfolioAssets);
   const [storageAssets, setStorageAssets] = useRecoilState(
     allPortfolioBoughtAssetsInStorage
@@ -134,10 +136,21 @@ const PortfolioAssetsList = () => {
       renderHiddenItem={(data) => renderButton(data)}
       ListHeaderComponent={
         <>
-          <View style={styles.balanceContainer}>
+          <View
+            style={{ ...styles.balanceContainer, color: reduxTheme.primary }}
+          >
             <View>
-              <Text style={styles.currentBalance}>Current Balance</Text>
-              <Text style={styles.currentBalanceValue}>
+              <Text
+                style={{ ...styles.currentBalance, color: reduxTheme.primary }}
+              >
+                Current Balance
+              </Text>
+              <Text
+                style={{
+                  ...styles.currentBalanceValue,
+                  color: reduxTheme.primary
+                }}
+              >
                 ${getCurrentBalance().toFixed(2)}
               </Text>
               <Text
@@ -166,11 +179,18 @@ const PortfolioAssetsList = () => {
               </Text>
             </View>
           </View>
-          <Text style={styles.assetsLabel}>Your Assets</Text>
-          <View style={styles.headerLabelContainer}>
+          <Text style={{ ...styles.assetsLabel, color: reduxTheme.primary }}>
+            Your Assets
+          </Text>
+          <View
+            style={{
+              ...styles.headerLabelContainer,
+              backgroundColor: reduxTheme.tableColor
+            }}
+          >
             <Text
               style={{
-                color: 'white',
+                color: reduxTheme.primary,
                 fontSize: 13,
                 fontWeight: 'bold',
                 flex: 1.2,
@@ -181,7 +201,7 @@ const PortfolioAssetsList = () => {
             </Text>
             <Text
               style={{
-                color: 'white',
+                color: reduxTheme.primary,
                 fontSize: 13,
                 flex: 1,
                 fontWeight: 'bold',
@@ -192,7 +212,7 @@ const PortfolioAssetsList = () => {
             </Text>
             <Text
               style={{
-                color: 'white',
+                color: reduxTheme.primary,
                 fontSize: 13,
                 flex: 1,
                 fontWeight: 'bold',

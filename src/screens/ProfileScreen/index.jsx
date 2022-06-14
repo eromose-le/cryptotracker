@@ -1,39 +1,28 @@
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import React, { useState } from 'react';
+import styles from './styles';
 import { useNavigation } from '@react-navigation/native';
+import { useSelector, useDispatch } from 'react-redux';
+import SwitchButton from '../../components/Button';
+import ProfileHeader from './ProfileHeader/ProfileHeader';
 
 const ProfileScreen = ({ route }) => {
   const navigation = useNavigation();
-  const [toggle, setToggle] = useState(false);
 
-  var themeState = { body: 'yellow' };
-
-  const handleToggle = (toggle) => {
-    setToggle(toggle);
-  };
+  const dispatch = useDispatch();
+  const { reduxThemeToggled, reduxTheme } = useSelector(
+    (state) => state.themeReducer
+  );
 
   return (
-    <View>
-      <Text style={{ color: 'white', padding: 20 }}>Profile Screen</Text>
-      <TouchableOpacity onPress={() => handleToggle(!toggle)}>
-        <Text
-          style={{
-            color: '#fff',
-            // backgroundColor: toggle ? 'red' : 'green',
-            backgroundColor: themeState.body,
-            padding: 20
-          }}
-        >
-          {toggle ? 'OFF' : 'ON'}
-        </Text>
-        <Text style={{ color: 'pink', padding: 20 }}>
-          {themeState.toString()}
-        </Text>
-      </TouchableOpacity>
+    <View style={{ paddingHorizontal: 10 }}>
+      <ProfileHeader />
+      <View>
+        <Text style={{ color: 'white', padding: 20 }}>Profile Screen</Text>
+      </View>
+      <SwitchButton />
     </View>
   );
 };
 
 export default ProfileScreen;
-
-const styles = StyleSheet.create({});

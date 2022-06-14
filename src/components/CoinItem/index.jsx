@@ -4,8 +4,10 @@ import { AntDesign } from '@expo/vector-icons';
 import styles from './styles';
 import { useNavigation } from '@react-navigation/native';
 import { LineChart } from 'react-native-chart-kit';
+import { useSelector } from 'react-redux';
 
 const CoinItem = ({ marketCoin }) => {
+  const { reduxTheme } = useSelector((state) => state.themeReducer);
   const {
     id,
     name,
@@ -41,7 +43,10 @@ const CoinItem = ({ marketCoin }) => {
 
   return (
     <Pressable
-      style={styles.coinContainer}
+      style={{
+        ...styles.coinContainer,
+        borderBottomColor: reduxTheme.lineColor
+      }}
       onPress={() => navigation.navigate('CoinDetailedScreen', { coinId: id })}
     >
       {/* left */}
@@ -62,12 +67,33 @@ const CoinItem = ({ marketCoin }) => {
           }}
         />
         <View>
-          <Text style={styles.title}>{name}</Text>
+          <Text
+            style={{
+              ...styles.title,
+              color: reduxTheme.primary
+            }}
+          >
+            {name}
+          </Text>
           <View style={{ flexDirection: 'row' }}>
-            <View style={styles.rankContainer}>
-              <Text style={styles.rank}>{market_cap_rank}</Text>
+            <View
+              style={{
+                ...styles.rankContainer,
+                backgroundColor: reduxTheme.secondary
+              }}
+            >
+              <Text
+                style={{
+                  ...styles.rank,
+                  color: reduxTheme.primary
+                }}
+              >
+                {market_cap_rank}
+              </Text>
             </View>
-            <Text style={styles.text}>{symbol.toUpperCase()}</Text>
+            <Text style={{ ...styles.text, color: reduxTheme.primary }}>
+              {symbol.toUpperCase()}
+            </Text>
             <AntDesign
               name={
                 price_change_percentage_24h < 0
@@ -106,9 +132,9 @@ const CoinItem = ({ marketCoin }) => {
             backgroundGradientFrom: '#1E2923',
             backgroundGradientFromOpacity: 0,
             backgroundGradientTo: '#08130D',
-            backgroundGradientToOpacity: 0.5,
+            backgroundGradientToOpacity: reduxTheme.gradientOpacity,
             strokeWidth: 1,
-            color: (opacity = 1) => `${percentageColor}`,
+            color: (opacity = 0) => `${percentageColor}`,
             style: {
               borderRadius: 16,
               fontSize: 10
@@ -122,9 +148,16 @@ const CoinItem = ({ marketCoin }) => {
         />
       </View>
       {/* right */}
-      <View style={{ marginLeft: 'auto', alignItems: 'flex-end', flex: 0.6 }}>
-        <Text style={styles.title}>{current_price}</Text>
-        <Text style={{ color: 'white' }}>
+      <View style={{ marginLeft: 'auto', alignItems: 'flex-end', flex: 0.7 }}>
+        <Text
+          style={{
+            ...styles.title,
+            color: reduxTheme.primary
+          }}
+        >
+          {current_price}
+        </Text>
+        <Text style={{ color: reduxTheme.primary }}>
           MCap {normalizeMarketCap(market_cap)}
         </Text>
       </View>

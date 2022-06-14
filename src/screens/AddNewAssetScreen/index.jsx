@@ -11,6 +11,7 @@ import {
 import SearchableDropdown from 'react-native-searchable-dropdown';
 import styles from './styles';
 import { Feather } from '@expo/vector-icons';
+import { useSelector } from 'react-redux';
 
 import { useRecoilState } from 'recoil';
 import { allPortfolioBoughtAssetsInStorage } from '../../atoms/PortfolioAssets';
@@ -21,6 +22,7 @@ import { useNavigation } from '@react-navigation/native';
 import uuid from 'react-native-uuid';
 
 const AddNewAssetScreen = () => {
+  const { reduxTheme } = useSelector((state) => state.themeReducer);
   const [allCoins, setAllCoins] = useState([]);
   const [boughtAssetQuantity, setBoughtAssetQuantity] = useState('');
   const [loading, setLoading] = useState(false);
@@ -104,11 +106,14 @@ const AddNewAssetScreen = () => {
         items={allCoins}
         onItemSelect={(item) => setSelectedCoinId(item.id)}
         containerStyle={styles.dropdownContainer}
-        itemStyle={styles.item}
-        itemTextStyle={{ color: 'white' }}
+        itemStyle={{
+          ...styles.item,
+          backgroundColor: reduxTheme.inputBackground
+        }}
+        itemTextStyle={{ color: reduxTheme.primary }}
         resetValue={false}
         placeholder={selectedCoinId || 'Select a coin...'}
-        placeholderTextColor="white"
+        placeholderTextColor={reduxTheme.primary}
         textInputProps={{
           underlineColorAndroid: 'transparent',
           style: {
@@ -116,7 +121,7 @@ const AddNewAssetScreen = () => {
             borderWidth: 1.5,
             borderColor: '#444444',
             borderRadius: 5,
-            backgroundColor: '#1e1e1e',
+            backgroundColor: reduxTheme.inputBackground,
             color: 'white'
           }
         }}
@@ -127,7 +132,7 @@ const AddNewAssetScreen = () => {
             <View style={{ flexDirection: 'row' }}>
               <TextInput
                 style={{
-                  color: 'white',
+                  color: reduxTheme.secondary,
                   fontSize: 90,
                   maxWidth: 280,
                   flexWrap: 'wrap'
@@ -137,11 +142,11 @@ const AddNewAssetScreen = () => {
                 keyboardType="numeric"
                 onChangeText={setBoughtAssetQuantity}
               />
-              <Text style={styles.ticker}>
+              <Text style={{ ...styles.ticker, color: reduxTheme.primary }}>
                 {selectedCoin.symbol.toUpperCase()}
               </Text>
             </View>
-            <Text style={styles.pricePerCoin}>
+            <Text style={{ ...styles.pricePerCoin, color: reduxTheme.primary }}>
               ${selectedCoin.market_data.current_price.usd} per coin
             </Text>
           </View>

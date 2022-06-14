@@ -1,30 +1,34 @@
 const colorThemes = [
   {
-    name: 'default',
-    primary: '#A855F7',
-    secondary: '#fff',
-    background: '#10121A',
-    title: '#A855F7',
-    body: '#fff'
+    name: 'dark',
+    mood: 'light',
+    primary: '#fff',
+    secondary: '#585858',
+    tertiary: 'grey',
+    lineColor: '#282828',
+    tableColor: '#2B2B2B',
+    background: '#121212',
+    tabBackground: '#181818',
+    inputBackground: '#1e1e1e',
+    body: '#121212',
+    gradientOpacity: 0.5,
+    switchColor: '#aaa'
   },
   {
-    name: 'salmon',
-    primary: '#6FCF97',
-    secondary: '#fff',
-    background: '#CF6F6F',
-    title: '#fff',
-    body: '#F6F8FF'
-  },
-  {
-    name: 'purple',
-    primary: '#10121A',
-    secondary: '#000',
-    background: '#A855F7',
-    title: '#000',
-    body: '#000'
+    name: 'light',
+    mood: 'dark',
+    primary: '#000',
+    secondary: '#b9b9b9',
+    tertiary: 'grey',
+    lineColor: '#e9e9e9',
+    tableColor: 'lightgrey',
+    background: '#fff',
+    tabBackground: '#fff',
+    inputBackground: '#eeeeee',
+    body: '#fff',
+    gradientOpacity: 0,
+    switchColor: '#eee'
   }
 ];
 
 export default colorThemes;
-
-//  backgroundColor: '#121212',

@@ -3,9 +3,11 @@ import { FlatList, RefreshControl, View, Text, Pressable } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import CoinItem from '../../components/CoinItem';
 import { getMarketData } from '../../services/requests';
+import { useSelector } from 'react-redux';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
+  const { reduxTheme } = useSelector((state) => state.themeReducer);
   const [coins, setCoins] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -45,7 +47,7 @@ const HomeScreen = () => {
         <Text
           style={{
             fontFamily: 'DroidSans',
-            color: 'white',
+            color: reduxTheme.primary,
             fontSize: 23,
             letterSpacing: 1,
             paddingHorizontal: 20,
@@ -57,10 +59,10 @@ const HomeScreen = () => {
         <Pressable onPress={() => navigation.navigate('ProfileScreen')}>
           <Text
             style={{
-              color: 'lightgrey',
+              color: reduxTheme.tertiary,
               fontSize: 12,
               paddingHorizontal: 10,
-              opacity: 0.1
+              opacity: 0.3
             }}
           >
             Powered by CoinGecko
@@ -74,7 +76,7 @@ const HomeScreen = () => {
         refreshControl={
           <RefreshControl
             refreshing={loading}
-            tintColor="white"
+            tintColor={reduxTheme.primary}
             onRefresh={refetchCoins}
           />
         }

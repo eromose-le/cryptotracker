@@ -5,10 +5,12 @@ import CoinDetailedScreen from '../screens/CoinDetailedScreen';
 import BottomTabNavigator from './BottomTabNavigator';
 import AddNewAssetScreen from '../screens/AddNewAssetScreen';
 import ProfileScreen from '../screens/ProfileScreen';
+import { useSelector } from 'react-redux';
 
 const Stack = createNativeStackNavigator();
 
-const Navigation = () => {
+const AppNavigation = () => {
+  const { reduxTheme } = useSelector((state) => state.themeReducer);
   return (
     <Stack.Navigator
       initialRouteName="Root"
@@ -35,8 +37,8 @@ const Navigation = () => {
         component={AddNewAssetScreen}
         options={{
           title: 'Add New Asset',
-          headerStyle: { backgroundColor: '#121212' },
-          headerTintColor: 'white',
+          headerStyle: { backgroundColor: reduxTheme.background },
+          headerTintColor: reduxTheme.primary,
           headerTitleStyle: {
             fontWeight: 'bold',
             fontSize: 14
@@ -47,4 +49,4 @@ const Navigation = () => {
   );
 };
 
-export default Navigation;
+export default AppNavigation;

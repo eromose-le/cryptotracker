@@ -2,12 +2,10 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   currentBalance: {
-    color: 'white',
     fontWeight: '600',
     fontSize: 15
   },
   currentBalanceValue: {
-    color: 'white',
     fontSize: 40,
     fontWeight: '700',
     letterSpacing: 1
@@ -36,7 +34,6 @@ const styles = StyleSheet.create({
     borderRadius: 5
   },
   assetsLabel: {
-    color: 'white',
     fontSize: 23,
     fontWeight: '700',
     paddingVertical: 20,
@@ -58,12 +55,9 @@ const styles = StyleSheet.create({
   headerLabelContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    backgroundColor: '#2B2B2B',
     paddingVertical: 7,
     borderRadius: 5,
     marginVertical: 10
-    // flexDirection: 'row',
-    // backgroundColor: '#121212'
   }
 });
 
