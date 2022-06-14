@@ -9,7 +9,9 @@ export const useTheme = () => useContext(ThemeContext);
 
 const ThemeProvider = ({ children }) => {
   const dispatch = useDispatch();
-  const { reduxThemeToggled } = useSelector((state) => state.themeReducer);
+  const { reduxThemeToggled, reduxTheme } = useSelector(
+    (state) => state.themeReducer
+  );
   const [selectTheme, setSelectTheme] = useState(0);
   const [theme, setTheme] = useState(colorThemes[selectTheme]);
 
@@ -17,10 +19,9 @@ const ThemeProvider = ({ children }) => {
     try {
       // clearTheme();
       const jsonValue = await AsyncStorage.getItem('@theme_colors');
-      setTheme(jsonValue != null ? JSON.parse(jsonValue) : theme);
       dispatch({
         type: 'GET_THEME',
-        payload: jsonValue != null ? JSON.parse(jsonValue) : theme
+        payload: jsonValue != null ? JSON.parse(jsonValue) : reduxTheme
       });
     } catch (e) {
       console.log(e);
@@ -29,26 +30,27 @@ const ThemeProvider = ({ children }) => {
 
   const clearTheme = async () => {
     await AsyncStorage.removeItem('@theme_colors');
-    setTheme(colorThemes[selectTheme]);
+    dispatch({
+      type: 'GET_THEME',
+      payload: colorThemes[0]
+    });
   };
 
   useEffect(() => {
     getThemeData();
-  }, [reduxThemeToggled]);
+  }, []);
 
   const changeThemeData = async (colorId) => {
     try {
-      setSelectTheme(colorId);
-      const newTheme = colorThemes[selectTheme];
+      console.log('colorId', colorId);
+      const newTheme = colorThemes[colorId];
       const jsonValue = JSON.stringify(newTheme);
-      await AsyncStorage.setItem('@theme_colors', jsonValue);
-      // UPDATE STATE
-      setTheme(colorThemes[selectTheme]);
-      // UPDATE REDUX
-      dispatch({
-        type: 'GET_THEME',
-        payload: colorThemes[selectTheme]
-      });
+      await AsyncStorage.setItem('@theme_colors', jsonValue).then(() =>
+        dispatch({
+          type: 'GET_THEME',
+          payload: colorThemes[colorId]
+        })
+      );
     } catch (e) {
       console.log(e);
     }

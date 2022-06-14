@@ -12,7 +12,8 @@ const colorThemes = [
     inputBackground: '#1e1e1e',
     body: '#121212',
     gradientOpacity: 0.5,
-    switchColor: '#aaa'
+    switchColor: '#aaa',
+    bool: false
   },
   {
     name: 'light',
@@ -27,7 +28,8 @@ const colorThemes = [
     inputBackground: '#eeeeee',
     body: '#fff',
     gradientOpacity: 0,
-    switchColor: '#eee'
+    switchColor: '#eee',
+    bool: true
   }
 ];
 

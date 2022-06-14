@@ -1,5 +1,6 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Dimensions } from 'react-native';
 import HomeScreen from '../screens/HomeScreen';
 import WatchlistScreen from '../screens/WatchlistScreen';
 import { Entypo, FontAwesome, Foundation } from '@expo/vector-icons';
@@ -7,6 +8,8 @@ import PortfolioScreen from '../screens/PortfolioScreen';
 import { useSelector } from 'react-redux';
 
 const Tab = createBottomTabNavigator();
+
+const screenWidth = Dimensions.get('window').width;
 
 const BottomTabNavigator = () => {
   const { reduxTheme } = useSelector((state) => state.themeReducer);
@@ -18,7 +21,11 @@ const BottomTabNavigator = () => {
         tabBarActiveTintColor: reduxTheme.primary,
         tabBarInactiveTintColor: reduxTheme.tertiary,
         tabBarStyle: {
-          backgroundColor: reduxTheme.tabBackground
+          backgroundColor: reduxTheme.tabBackground,
+          height: screenWidth / 5,
+          paddingBottom: 15,
+          paddingTop: 5,
+          borderTopColor: 'transparent'
         }
       }}
     >
