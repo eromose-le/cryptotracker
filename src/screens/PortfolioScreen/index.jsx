@@ -2,18 +2,13 @@ import React, { Suspense } from 'react';
 import { View, Text } from 'react-native';
 import PortfolioAssetsList from './components/PortfolioAssetsList';
 import { useSelector } from 'react-redux';
+import Spinner from '../../components/Spinner';
 
 const PortfolioScreen = () => {
   const { reduxTheme } = useSelector((state) => state.themeReducer);
   return (
     <View style={{ flex: 1 }}>
-      <Suspense
-        fallback={
-          <Text style={{ color: reduxTheme.primary }}>
-            Loading Please Wait!
-          </Text>
-        }
-      >
+      <Suspense fallback={<Spinner color={reduxTheme.primary} />}>
         <Text
           style={{
             fontFamily: 'Capuche',

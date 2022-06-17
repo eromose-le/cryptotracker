@@ -4,6 +4,8 @@ import { useNavigation } from '@react-navigation/native';
 import CoinItem from '../../components/CoinItem';
 import { getMarketData } from '../../services/requests';
 import { useSelector } from 'react-redux';
+import { FontAwesome } from '@expo/vector-icons';
+import SwitchButton from '../../components/Button';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -44,29 +46,44 @@ const HomeScreen = () => {
           alignItems: 'center'
         }}
       >
-        <Text
-          style={{
-            fontFamily: 'DroidSans',
-            color: reduxTheme.primary,
-            fontSize: 23,
-            letterSpacing: 1,
-            paddingHorizontal: 20,
-            paddingBottom: 5
-          }}
-        >
-          Cryptoassets List
-        </Text>
-        <Pressable onPress={() => navigation.navigate('ProfileScreen')}>
+        {/* left */}
+        <View>
+          <Text
+            style={{
+              fontFamily: 'DroidSans',
+              color: reduxTheme.primary,
+              fontSize: 23,
+              letterSpacing: 1,
+              paddingHorizontal: 20,
+              paddingBottom: 5
+            }}
+          >
+            Cryptoassets List
+          </Text>
           <Text
             style={{
               color: reduxTheme.tertiary,
               fontSize: 12,
-              paddingHorizontal: 10,
+              paddingHorizontal: 20,
               opacity: 0.3
             }}
           >
             Powered by CoinGecko
           </Text>
+        </View>
+        {/* profile */}
+        <Pressable
+          onPress={() => navigation.navigate('ProfileScreen')}
+          style={{
+            alignSelf: 'flex-start',
+            paddingHorizontal: 20
+          }}
+        >
+          <FontAwesome
+            name="user-circle"
+            size={30}
+            color={reduxTheme.primary}
+          />
         </Pressable>
       </View>
       <FlatList

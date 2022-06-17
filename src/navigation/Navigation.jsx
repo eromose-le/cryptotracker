@@ -36,7 +36,7 @@ export default function Navigation() {
             <View
               style={{
                 ...styles.container,
-                backgroundColor: reduxTheme.background
+                backgroundColor: reduxTheme.body
               }}
             >
               <AppNavigation />

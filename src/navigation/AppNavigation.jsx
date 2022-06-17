@@ -37,7 +37,7 @@ const AppNavigation = () => {
         component={AddNewAssetScreen}
         options={{
           title: 'Add New Asset',
-          headerStyle: { backgroundColor: reduxTheme.background },
+          headerStyle: { backgroundColor: reduxTheme.body },
           headerTintColor: reduxTheme.primary,
           headerTitleStyle: {
             fontWeight: 'bold',

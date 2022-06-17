@@ -25,7 +25,7 @@ const PortfolioAssetsItem = ({ assetItem }) => {
       <View
         style={{
           ...styles.coinContainer,
-          backgroundColor: reduxTheme.background
+          backgroundColor: reduxTheme.body
         }}
       >
         {/* 1st column */}

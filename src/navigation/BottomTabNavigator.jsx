@@ -3,9 +3,10 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Dimensions } from 'react-native';
 import HomeScreen from '../screens/HomeScreen';
 import WatchlistScreen from '../screens/WatchlistScreen';
-import { Entypo, FontAwesome, Foundation } from '@expo/vector-icons';
+import { Entypo, FontAwesome, Foundation, Fontisto } from '@expo/vector-icons';
 import PortfolioScreen from '../screens/PortfolioScreen';
 import { useSelector } from 'react-redux';
+import ProfileScreen from '../screens/ProfileScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -22,10 +23,10 @@ const BottomTabNavigator = () => {
         tabBarInactiveTintColor: reduxTheme.tertiary,
         tabBarStyle: {
           backgroundColor: reduxTheme.tabBackground,
-          height: screenWidth / 5,
-          paddingBottom: 15,
-          paddingTop: 5,
-          borderTopColor: 'transparent'
+          height: screenWidth / 4.5,
+          paddingBottom: 20,
+          paddingTop: 8,
+          borderTopColor: reduxTheme.tabTopBorderColor
         }
       }}
     >
@@ -57,6 +58,19 @@ const BottomTabNavigator = () => {
         options={{
           tabBarIcon: ({ focused, color }) => (
             <FontAwesome name="star" size={focused ? 30 : 25} color={color} />
+          )
+        }}
+      />
+      <Tab.Screen
+        name="Settings"
+        component={ProfileScreen}
+        options={{
+          tabBarIcon: ({ focused, color }) => (
+            <Fontisto
+              name="player-settings"
+              size={focused ? 30 : 25}
+              color={color}
+            />
           )
         }}
       />

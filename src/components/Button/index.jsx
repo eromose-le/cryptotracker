@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { View, Switch } from 'react-native';
+import { View, Switch, Text } from 'react-native';
 import styles from './styles';
 import { useTheme } from '../../Contexts/ThemeContext';
 import { useSelector, useDispatch } from 'react-redux';
 
-const SwitchButton = () => {
+const SwitchButton = ({ children }) => {
   const dispatch = useDispatch();
   const { reduxThemeToggled, reduxTheme } = useSelector(
     (state) => state.themeReducer
@@ -42,12 +42,14 @@ const SwitchButton = () => {
   return (
     <View style={styles.container}>
       <Switch
+        style={{ transform: [{ scaleX: 0.8 }, { scaleY: 0.8 }] }}
         trackColor={{ false: '#767577', true: '#16c784' }}
         thumbColor={toggle ? '#f4f3f4' : '#f4f3f4'}
         ios_backgroundColor="#3e3e3e"
         onValueChange={() => changeThemeColor(!toggle)}
         value={toggle}
       />
+      {children}
     </View>
   );
 };

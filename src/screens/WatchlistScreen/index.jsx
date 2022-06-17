@@ -4,7 +4,8 @@ import {
   Text,
   FlatList,
   RefreshControl,
-  TouchableOpacity
+  TouchableOpacity,
+  Dimensions
 } from 'react-native';
 import { useWatchlist } from '../../Contexts/WatchlistContext';
 import CoinItem from '../../components/CoinItem';
@@ -13,6 +14,7 @@ import { Ionicons } from '@expo/vector-icons';
 import styles from './styles';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
+import ModalComponent from '../../components/Modal';
 
 const WatchlistScreen = () => {
   const { reduxTheme } = useSelector((state) => state.themeReducer);
@@ -37,6 +39,10 @@ const WatchlistScreen = () => {
     setLoading(false);
   };
 
+  const invokeClearWatchlist = () => {
+    return clearWatchlist();
+  };
+
   useEffect(() => {
     if (watchlistCoinIds.length > 0) {
       fetchWatchlistedCoins();
@@ -58,8 +64,10 @@ const WatchlistScreen = () => {
       </View>
     );
   }
+
   return (
     <>
+      {/* title */}
       <Text
         style={{
           fontFamily: 'Capuche',
@@ -72,9 +80,38 @@ const WatchlistScreen = () => {
       >
         Watchlist
       </Text>
+
+      {/* list */}
       <FlatList
         data={coins}
         renderItem={({ item }) => <CoinItem marketCoin={item} />}
+        ListFooterComponent={() => (
+          <View
+            style={{
+              backgroundColor: reduxTheme.background,
+              position: 'relative'
+            }}
+          >
+            {coins.length > 9 && (
+              <ModalComponent
+                opacity={1}
+                backgroundColor={reduxTheme.background}
+                invokeClearWatchlist={invokeClearWatchlist}
+              >
+                <View style={styles.deleteItem}>
+                  <Ionicons
+                    name="ios-basket-outline"
+                    size={25}
+                    color="#4f4f4f"
+                  />
+                  <Text style={{ color: '#4f4f4f', fontSize: 8 }}>
+                    Clear all
+                  </Text>
+                </View>
+              </ModalComponent>
+            )}
+          </View>
+        )}
         refreshControl={
           <RefreshControl
             refreshing={loading}
@@ -85,15 +122,23 @@ const WatchlistScreen = () => {
           />
         }
       />
-      <TouchableOpacity
-        style={styles.deleteContainer}
-        onPress={() => clearWatchlist()}
+
+      {/* clearWatchlist */}
+      <View
+        style={{
+          position: 'absolute',
+          bottom: 0,
+          alignSelf: 'center',
+          width: '20%'
+        }}
       >
-        <View style={styles.deleteItem}>
-          <Ionicons name="ios-basket-outline" size={25} color="#4f4f4f" />
-          <Text style={{ color: '#4f4f4f', fontSize: 8 }}>Clear all</Text>
-        </View>
-      </TouchableOpacity>
+        <ModalComponent invokeClearWatchlist={invokeClearWatchlist}>
+          <View style={styles.deleteItem}>
+            <Ionicons name="ios-basket-outline" size={25} color="#4f4f4f" />
+            <Text style={{ color: '#4f4f4f', fontSize: 8 }}>Clear all</Text>
+          </View>
+        </ModalComponent>
+      </View>
     </>
   );
 };

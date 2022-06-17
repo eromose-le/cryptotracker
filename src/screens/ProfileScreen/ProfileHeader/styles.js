@@ -4,7 +4,8 @@ const styles = StyleSheet.create({
   headerContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    paddingBottom: 5
   },
   profileContainer: {
     flexDirection: 'row',

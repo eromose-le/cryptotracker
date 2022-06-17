@@ -1,7 +1,7 @@
 import React, { useContext, createContext, useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import colorThemes from '../constants/colorThemes';
 import { useSelector, useDispatch } from 'react-redux';
+import { colorThemes } from '../../assets/constants';
 
 const ThemeContext = createContext();
 
@@ -48,7 +48,7 @@ const ThemeProvider = ({ children }) => {
       await AsyncStorage.setItem('@theme_colors', jsonValue).then(() =>
         dispatch({
           type: 'GET_THEME',
-          payload: colorThemes[colorId]
+          payload: colorThemes[0]
         })
       );
     } catch (e) {
