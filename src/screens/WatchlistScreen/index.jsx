@@ -70,7 +70,7 @@ const WatchlistScreen = () => {
       {/* title */}
       <Text
         style={{
-          fontFamily: 'Capuche',
+          fontFamily: 'Roboto_700Bold',
           color: reduxTheme.primary,
           fontSize: 23,
           letterSpacing: 1,

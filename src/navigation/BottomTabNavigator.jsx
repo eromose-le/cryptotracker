@@ -23,8 +23,8 @@ const BottomTabNavigator = () => {
         tabBarInactiveTintColor: reduxTheme.tertiary,
         tabBarStyle: {
           backgroundColor: reduxTheme.tabBackground,
-          height: screenWidth / 4.5,
-          paddingBottom: 20,
+          height: screenWidth / 4,
+          paddingBottom: 30,
           paddingTop: 8,
           borderTopColor: reduxTheme.tabTopBorderColor
         }

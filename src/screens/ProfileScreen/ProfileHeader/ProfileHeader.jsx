@@ -20,7 +20,13 @@ const ProfileHeader = () => {
       />
       {/* title */}
       <View style={styles.profileContainer}>
-        <Text style={{ ...styles.profileTitle, color: reduxTheme.primary }}>
+        <Text
+          style={{
+            ...styles.profileTitle,
+            color: reduxTheme.primary,
+            fontFamily: 'Roboto_700Bold'
+          }}
+        >
           Edit Profile
         </Text>
       </View>

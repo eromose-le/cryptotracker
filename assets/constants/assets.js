@@ -13,6 +13,26 @@ import nft05 from '../../assets/images/nft05.jpeg';
 import nft06 from '../../assets/images/nft06.jpeg';
 import nft07 from '../../assets/images/nft07.jpeg';
 
+import { Inter_900Black, useFonts } from '@expo-google-fonts/inter';
+
+const DroidSans = require('../fonts/DroidSans.ttf');
+import {
+  Roboto_100Thin,
+  Roboto_100Thin_Italic,
+  Roboto_300Light,
+  Roboto_300Light_Italic,
+  Roboto_400Regular,
+  Roboto_400Regular_Italic,
+  Roboto_500Medium,
+  Roboto_500Medium_Italic,
+  Roboto_700Bold,
+  Roboto_700Bold_Italic,
+  Roboto_900Black,
+  Roboto_900Black_Italic
+} from '@expo-google-fonts/roboto';
+
+const Capuche = require('../fonts/Capuche.otf');
+
 import person01 from '../../assets/images/person01.png';
 import person02 from '../../assets/images/person02.png';
 import person03 from '../../assets/images/person03.png';
@@ -33,6 +53,23 @@ export default {
   nft05,
   nft06,
   nft07,
+
+  useFonts,
+  Inter_900Black,
+  DroidSans,
+  Capuche,
+  Roboto_100Thin,
+  Roboto_100Thin_Italic,
+  Roboto_300Light,
+  Roboto_300Light_Italic,
+  Roboto_400Regular,
+  Roboto_400Regular_Italic,
+  Roboto_500Medium,
+  Roboto_500Medium_Italic,
+  Roboto_700Bold,
+  Roboto_700Bold_Italic,
+  Roboto_900Black,
+  Roboto_900Black_Italic,
 
   person01,
   person02,
